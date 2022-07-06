@@ -10,13 +10,24 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("application.properties")
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		try(AnnotationConfigApplicationContext ctx = 
 				new AnnotationConfigApplicationContext(App.class)){
 			
-			Store store = ctx.getBean(Store.class);
-			System.out.println(store);
+			System.out.println("up");
+			
+			Thread.sleep(3000);
+			
+			 Store store = ctx.getBean(Store.class);
+			 System.out.println(store);
+
+			 Thread.sleep(3000);
+			 
+			 Store store1 = ctx.getBean(Store.class);
+			 System.out.println(store1);
+			
+			System.out.println("end");
 			
 		}
 
