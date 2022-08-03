@@ -1,1 +1,29 @@
-Welcome to Spring Web
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>school</title>
+</head>
+<body>
+    <h1>Welcome to School</h1>
+    <input id="school-id" type="number" placeholder="enter id">
+    <br>
+    <button onclick="getSchool()">get</button>
+    <div id="response"></div>
+
+    <script>
+        function getSchool() {
+           const id = document.getElementById("school-id").value;
+           console.log(id);
+           // make a requst to 8080 to get the school
+           const xhttp = new XMLHttpRequest();
+           xhttp.onload = function () {
+               console.log(this.response);
+               document.getElementById("response").innerHTML = this.response;
+           }
+           xhttp.open("GET", "http://localhost:8080/api/school/" + id);
+           xhttp.send();
+           //
+        }
+    </script>
+</body>
+</html>
