@@ -30,7 +30,7 @@ public class School {
 	private int id;
 	private String name;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "address_id") // owner
 	private Address address;
 
