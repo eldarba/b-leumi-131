@@ -1,6 +1,8 @@
 package app.core.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,11 +32,27 @@ public class School {
 	private int id;
 	private String name;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id") // owner
 	private Address address;
 
-	@OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
 	private List<Teacher> teachers;
+	
+	public void addTeacher(Teacher teacher) {
+//		Optional.ofNullable(teachers).ifPresent(null);
+		if(teachers == null) {
+			this.teachers = new ArrayList<>();
+		}
+		teacher.setSchool(this);
+		this.teachers.add(teacher);
+	}
+	
+	public void setTeachers(List<Teacher> teachers) {
+		for (Teacher teacher : teachers) {
+			teacher.setSchool(this);
+		}
+		this.teachers = teachers;
+	}
 
 }
