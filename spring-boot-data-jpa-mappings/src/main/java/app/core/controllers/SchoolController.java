@@ -1,6 +1,7 @@
 package app.core.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,13 +18,13 @@ import app.core.services.SchoolService;
 
 //@CrossOrigin(originPatterns = "http://127.0.0.1:5500")
 @RestController
-@RequestMapping("/api/school")
+@RequestMapping(path =  "/api/school", headers = HttpHeaders.AUTHORIZATION)
 public class SchoolController {
 
 	@Autowired
 	private SchoolService service;
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@PostMapping
 	public int createSchool(@RequestBody School school) {
 		return service.createSchool(school);
 	}
