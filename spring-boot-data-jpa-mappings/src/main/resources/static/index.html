@@ -17,8 +17,13 @@
            // make a requst to 8080 to get the school
            const xhttp = new XMLHttpRequest();
            xhttp.onload = function () {
-               console.log(this.response);
-               document.getElementById("response").innerHTML = this.response;
+               if(this.status === 200){
+                   document.getElementById("response").innerHTML = this.response;
+                }else{
+                    let error = JSON.parse(this.response);
+                    console.log(error);
+                    document.getElementById("response").innerHTML = error.message;
+               }
            }
            xhttp.open("GET", "http://localhost:8080/api/school/" + id);
            xhttp.send();
